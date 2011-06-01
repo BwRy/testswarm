@@ -24,7 +24,7 @@
 		}
 	}
 
-	$result = mysql_queryf("SELECT useragents.engine as engine, useragents.name as name, clients.os as os, DATE_FORMAT(clients.created, '%Y-%m-%dT%H:%i:%sZ') as since FROM users, clients, useragents WHERE clients.useragent_id=useragents.id AND DATE_ADD(clients.updated, INTERVAL 1 minute) > NOW() AND clients.user_id=users.id AND users.name=%s ORDER BY useragents.engine, useragents.name;", $search_user);
+	$result = mysql_queryf("SELECT useragents.engine as engine, useragents.name as name, clients.os as os, DATE_FORMAT(clients.created, '%Y-%m-%dT%H:%i:%sZ') as since, IFNULL(useragents.icon, useragents.engine) as icon FROM users, clients, useragents WHERE clients.useragent_id=useragents.id AND DATE_ADD(clients.updated, INTERVAL 1 minute) > NOW() AND clients.user_id=users.id AND users.name=%s ORDER BY useragents.engine, useragents.name;", $search_user);
 
 	if ( mysql_num_rows($result) > 0 ) {
 
@@ -35,6 +35,7 @@
 		$browser_name = $row[1];
 		$name = $row[2];
 		$since = $row[3];
+		$icon = $row[4];
 
 		if ( $name == "xp" ) {
 			$name = "Windows XP";
@@ -58,7 +59,7 @@
 			$name = "Linux";
 		}
 
-		echo "<li><img src='" . swarmpath( '/' ) . "images/$engine.sm.png' class='$engine'/> <strong class='name'>$browser_name $name</strong><br>Connected <span title='$since' class='pretty'>$since</span></li>";
+		echo "<li><img src='" . swarmpath( '/' ) . "images/$icon.sm.png' class='browser-icon $icon'/> <strong class='name'>$browser_name $name</strong><br>Connected <span title='$since' class='pretty'>$since</span></li>";
 	}
 
 	echo "</ul>";
@@ -89,7 +90,7 @@
 		$results = array();
 		$states = array();
 
-	$result = mysql_queryf("SELECT runs.id as run_id, runs.url as run_url, runs.name as run_name, useragents.engine as browser, useragents.name as browsername, useragents.id as useragent_id, run_useragent.status as status FROM run_useragent, runs, useragents WHERE runs.job_id=%u AND run_useragent.run_id=runs.id AND run_useragent.useragent_id=useragents.id ORDER BY run_id, browsername;", $job_id);
+	$result = mysql_queryf("SELECT runs.id as run_id, runs.url as run_url, runs.name as run_name, useragents.engine as browser, useragents.name as browsername, useragents.id as useragent_id, run_useragent.status as status, IFNULL(useragents.icon, useragents.engine) as icon FROM run_useragent, runs, useragents WHERE runs.job_id=%u AND run_useragent.run_id=runs.id AND run_useragent.useragent_id=useragents.id ORDER BY run_id, browsername;", $job_id);
 
 	while ( $row = mysql_fetch_assoc($result) ) {
 		if ( $row["run_id"] != $last ) {
@@ -114,6 +115,7 @@
 			array_push( $browsers, array(
 				"name" => $row["browsername"],
 				"engine" => $row["browser"],
+				"icon" => $row["icon"],
 				"id" => $row["useragent_id"]
 			) );
 		}
@@ -154,7 +156,6 @@
 		$last = $row["run_id"];
 	}
 
-
 	foreach ( $results as $key => $fail ) {
 		$output .= "<td class='" . $states[$key] . "'></td>";
 	}
@@ -169,8 +170,8 @@
 		foreach ( $browsers as $browser ) {
 			if ( $last_browser["id"] != $browser["id"] ) {
 				$header .= '<th><div class="browser">' .
-					'<img src="' . swarmpath( 'images/' ) . $browser["engine"] .
-					'.sm.png" class="browser-icon ' . $browser["engine"] .
+					'<img src="' . swarmpath( 'images/' ) . $browser["icon"] .
+					'.sm.png" class="browser-icon ' . $browser["icon"] .
 					'" alt="' . $browser["name"] .
 					'" title="' . $browser["name"] .
 					'"/><span class="browser-name">' .

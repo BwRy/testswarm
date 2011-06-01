@@ -94,6 +94,7 @@ CREATE TABLE `useragents` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(255) NOT NULL default '',
   `engine` varchar(255) NOT NULL default '',
+  `icon` varchar(255),
   `version` varchar(255) NOT NULL default '',
   `active` tinyint(4) NOT NULL default '0',
   `current` tinyint(4) NOT NULL default '0',

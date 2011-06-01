@@ -50,7 +50,7 @@
 <table class="results"><tbody>
 <?php
 
-	$result = mysql_queryf("SELECT runs.id as run_id, runs.url as run_url, runs.name as run_name, useragents.engine as browser, useragents.name as browsername, useragents.id as useragent_id, run_useragent.status as status FROM run_useragent, runs, useragents WHERE runs.job_id=%u AND run_useragent.run_id=runs.id AND run_useragent.useragent_id=useragents.id ORDER BY run_id, browsername;", $job_id);
+	$result = mysql_queryf("SELECT runs.id as run_id, runs.url as run_url, runs.name as run_name, useragents.engine as browser, useragents.name as browsername, useragents.id as useragent_id, run_useragent.status as status, IFNULL(useragents.icon, useragents.engine) as icon FROM run_useragent, runs, useragents WHERE runs.job_id=%u AND run_useragent.run_id=runs.id AND run_useragent.useragent_id=useragents.id ORDER BY run_id, browsername;", $job_id);
 
 	$last = "";
 	$output = "";
@@ -62,6 +62,7 @@
 			if ( $last ) {
 				$addBrowser = false;
 			}
+
 			$useragents = array();
 
 			$runResult = mysql_queryf("SELECT run_client.client_id as client_id, run_client.status as status, run_client.fail as fail, run_client.error as error, run_client.total as total, clients.useragent_id as useragent_id FROM run_client, clients WHERE run_client.run_id=%u AND run_client.client_id=clients.id ORDER BY useragent_id;", $row["run_id"]);
@@ -81,6 +82,7 @@
 			array_push( $browsers, array(
 				"name" => $row["browsername"],
 				"engine" => $row["browser"],
+				"icon" => $row['icon'],
 				"id" => $row["useragent_id"]
 			) );
 		}
@@ -121,8 +123,8 @@
 		foreach ( $browsers as $browser ) {
 			if ( $last_browser["id"] != $browser["id"] ) {
 				$header .= '<th><div class="browser">' .
-					'<img src="' . swarmpath( 'images/' ) . $browser["engine"] .
-					'.sm.png" class="browser-icon ' . $browser["engine"] .
+					'<img src="' . swarmpath( 'images/' ) . $browser["icon"] .
+					'.sm.png" class="browser-icon ' . $browser["icon"] .
 					'" alt="' . $browser["name"] .
 					'" title="' . $browser["name"] .
 					'"/><span class="browser-name">' .
