@@ -8,6 +8,7 @@ INSERT INTO useragents (name, engine, version, active, current, popular, gbs, be
 INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('Firefox 3.5', 'gecko', '^1.9.1', 1, 0, 0, 1, 0, 0);
 INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('Firefox 3.6', 'gecko', '^1.9.2', 1, 0, 1, 1, 0, 0);
 INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('Firefox 4.0', 'gecko', '^2.0', 1, 1, 1, 1, 0, 0);
+INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('Firefox 5.0', 'gecko', '^5.0', 1, 1, 1, 1, 1, 0);
 
 -- Safari
 INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('Safari 3.1', 'webkit', '^525.19', 1, 0, 1, 0, 0, 0);
