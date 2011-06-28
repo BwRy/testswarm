@@ -24,11 +24,12 @@ INSERT INTO useragents (name, engine, version, active, current, popular, gbs, be
 
 -- Opera
 INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('Opera 9.6', 'presto', '^2.1', 1, 0, 1, 0, 0, 0);
-INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('Opera 10.20', 'presto', '^2.2.15$', 1, 0, 1, 0, 0, 0);
+INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('Opera 10.1x', 'presto', '^2.2.15$', 1, 0, 1, 0, 0, 0);
 INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('Opera 10.5x', 'presto', '^2.5.', 1, 0, 1, 0, 0, 0);
 INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('Opera 10.6x', 'presto', '^2.6.', 1, 0, 1, 0, 0, 0);
 INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('Opera 11.0x', 'presto', '^2.7.', 1, 0, 1, 1, 0, 0);
-INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('Opera 11.1x', 'presto', '^2.8.', 1, 1, 1, 1, 0, 0);
+INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('Opera 11.1x', 'presto', '^2.8.', 1, 0, 1, 1, 0, 0);
+INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('Opera 11.5x', 'presto', '^2.9.', 1, 1, 1, 1, 0, 0);
 
 -- Chrome
 INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('Chrome', 'chrome', '.*', 1, 1, 1, 1, 0, 0);
