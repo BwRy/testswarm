@@ -64,6 +64,7 @@ INSERT INTO useragents (name, engine, version, active, current, popular, gbs, be
 
 -- Palm WebOS
 INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('webOS Browser 1.4', 'webos', '^1.4', 1, 1, 0, 0, 0, 1);
+INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('webOS Browser 3.0', 'hpwos', '^3.0', 1, 1, 0, 0, 0, 1);
 
 -- Symbian S60
 INSERT INTO useragents (name, engine, version, active, current, popular, gbs, beta, mobile) VALUES ('S60 3.2', 's60', '^3.2$', 1, 0, 0, 0, 0, 1);
